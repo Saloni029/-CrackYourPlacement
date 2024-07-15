@@ -1,0 +1,26 @@
+class Solution {
+public:
+    ListNode* reverse(ListNode* head){
+        if(head == NULL || head -> next == NULL) return head ;
+        ListNode* newhead = reverse(head -> next) ;
+        ListNode* front = head -> next ;
+        front -> next = head ; 
+        head -> next = NULL ; 
+        return newhead ;
+    }
+
+    int getDecimalValue(ListNode* head) {
+        ListNode* head1 = reverse(head) ; 
+        int val1 = 0, ans = 0 ;
+        while(head1 != NULL){
+            int v = head1 -> val ;
+            ans += v*(1 << val1) ;
+            val1++ ;
+            head1 = head1 -> next ;
+        }
+        return ans ;
+    }
+};
+
+TC - O(N) (for reverse) + O(N) (for again traversing the ll)  = O(N)
+SC - O(1)

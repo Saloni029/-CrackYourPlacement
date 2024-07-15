@@ -30,4 +30,4 @@ public:
 }; 
 
 TC - 0(N*M)
-SC - O(N*M)
+SC - O(1) as we have to modifiy image only and we have used that only to store the ans not for solving.

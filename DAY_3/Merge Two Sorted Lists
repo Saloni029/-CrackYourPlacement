@@ -1,0 +1,33 @@
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* temph = new ListNode(-1) ;
+        ListNode* tempt = temph ;
+        while(list1 != NULL && list2 != NULL){
+            int val1 = list1 -> val ;
+            int val2 = list2 -> val ;
+            if(val1 <= val2){
+                tempt -> next = list1 ; 
+                list1 = list1 -> next ;
+            }
+            else if(val2 < val1){
+                tempt -> next = list2 ; 
+                list2 = list2 -> next ;
+            }
+            tempt = tempt -> next ;
+        }
+
+        while(list1 != NULL){
+            tempt -> next = list1 ; 
+            list1 = list1 -> next ;
+            tempt = tempt -> next ;
+        }
+
+        while(list2 != NULL){
+            tempt -> next = list2 ; 
+            list2 = list2 -> next ;
+            tempt = tempt -> next ;
+        }
+        return temph -> next ;
+    }
+};

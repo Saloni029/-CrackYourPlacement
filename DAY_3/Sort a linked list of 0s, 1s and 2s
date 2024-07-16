@@ -1,0 +1,37 @@
+class Solution
+{
+    public:
+    //Function to sort a linked list of 0s, 1s and 2s.
+    Node* segregate(Node *head) {
+        if(head == NULL || head -> next == NULL) return head ;
+        Node* zeroh = new Node(-1) ;  
+        Node* zerot = zeroh ; 
+        Node* oneh = new Node(-1) ;
+        Node* onet = oneh ; 
+        Node* twoh = new Node(-1) ; 
+        Node* twot = twoh ;
+        while(head != NULL) {
+            if(head -> data == 0){
+                zerot -> next = head ; 
+                zerot = zerot -> next ;
+            }
+            else if(head -> data == 1){
+                onet -> next = head ; 
+                onet = onet -> next ;
+            }
+            else{
+                twot -> next = head ; 
+                twot = twot -> next ;
+            }
+            head = head -> next; 
+        }
+        if(oneh == onet) zerot -> next = twoh -> next ; 
+        else zerot -> next = oneh -> next ;
+        onet -> next = twoh -> next ;
+        twot -> next = NULL ;
+        return zeroh -> next ; 
+    }
+};
+
+TC - O(N)
+SC - 0(1)

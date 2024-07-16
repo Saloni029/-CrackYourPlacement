@@ -1,0 +1,23 @@
+class solution {
+  public:
+    
+    long long multiplyTwoLists(Node *first, Node *second) {
+        long long mod = 1e9+7 ;
+        long long n1=0, n2=0 ;
+
+        while(first != NULL){
+            n1 = (n1*10)%mod + first->data ;
+            first = first -> next ;
+        }
+
+        while(second != NULL){
+            n2 = (n2*10)%mod + second->data ;
+            second = second -> next ;
+        }
+    
+        return (n1*n2)%mod ;
+    }
+};
+
+TC - O(N)
+SC - O(1)

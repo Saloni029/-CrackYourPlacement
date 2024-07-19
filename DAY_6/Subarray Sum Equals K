@@ -1,0 +1,45 @@
+APPROACH 1
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int cnt = 0, n=nums.size() ;
+        for(int i=0 ; i<n ; i++){
+            int sum = 0 ;
+            for(int j=i ; j<n ; j++){
+                sum += nums[j] ;
+                if(sum == k) cnt++ ;
+            }
+        }
+        return cnt ;
+    }
+};
+TC - O(N2)
+SC - O(1)
+
+
+
+
+
+APPROACH 2
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int cnt = 0, sum = 0 ;
+        unordered_map<int, int>m ; 
+        m[0] = 1 ;
+        for(auto i:nums){
+            sum += i ;
+            if(m.find(sum-k) != m.end()){
+                cnt += m[sum-k] ;
+            }
+            m[sum]++ ;
+        }
+        return cnt ;
+    }
+};
+TC - O(N)
+SC - O(N)
+
+
+

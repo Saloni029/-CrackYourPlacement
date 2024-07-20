@@ -1,0 +1,11 @@
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p==NULL && q==NULL) return true ;
+        if(p==NULL || q==NULL) return false ;
+        return p->val==q->val && isSameTree(p->left, q->left) && isSameTree(p->right, q->right) ;
+    }
+};
+
+TC - O(min(n, m)) ; where n = no of nodes in p and q = no of nodes in q
+SC - O(min(h1, h2)) ; where h1 = height of p and h2 = height of q 

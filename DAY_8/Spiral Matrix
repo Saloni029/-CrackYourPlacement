@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        vector<int>ans ;
+        int n = matrix.size()-1, m=matrix[0].size()-1, c=0, r=0 ;
+        while(r<=n && c<=m){
+            for(int i=c ; i<=m ; i++){
+                ans.push_back(matrix[r][i]) ;
+            }
+            r++ ;
+
+            for(int i=r ; i<=n ; i++){
+                ans.push_back(matrix[i][m]) ;
+            }
+            m-- ; 
+            
+            if(r <= n){
+                for(int i=m ; i>=c ; i--){
+                    ans.push_back(matrix[n][i]) ;
+                }
+                n-- ;
+            }
+
+            if(c <= m){
+                for(int i=n ; i>=r ; i--){
+                    ans.push_back(matrix[i][c]) ;
+                }
+                c++ ;
+            }
+        }
+        return ans ;
+    }
+};
+
+
+TC - O(N*M)
+SC - 0(1)

@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    Node *compute(Node *head){
+        vector<int>v ;
+        Node* temp = head ;
+        while(temp != NULL){
+            v.push_back(temp->data) ;
+            temp = temp -> next ;
+        }
+        
+        priority_queue<int,vector<int>, greater<int>>pq ; 
+        vector<pair<int,int>>ans(v.size()) ;
+        pq.push(v[v.size()-1]);
+        ans[v.size()-1] = {v[v.size()-1], -1} ;
+        for(int i=v.size()-2 ; i>=0 ; i--){
+            while(!pq.empty() && pq.top() <= v[i]) pq.pop() ;
+            if(!pq.empty() && pq.top() > v[i]) ans[i]={v[i],pq.top()} ;
+            else ans[i] = {v[i], -1} ;
+            pq.push(v[i]) ;
+        }
+        
+        Node* newhead = new Node(INT_MAX) ;
+        Node* newt = newhead ;
+        for(int i=0 ; i<ans.size() ; i++){
+            if(ans[i].second==-1){
+                Node* node = new Node(ans[i].first) ;
+                newt -> next = node ; 
+                newt = node ; 
+            }
+        }
+        return newhead->next ;
+    }    
+};
+
+
+TC- O(NLOGN)
+SC - O(N)

@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isvalid(string strs, int z, int o, int& zer, int& one){
+        for(auto& i:strs){
+            if(i=='0') zer++ ;
+            else one++ ;
+        }
+        if(zer <= z && one <= o) return 1 ;
+        return 0 ;
+    }
+
+    int solve(int ind, int zeros, int ones, vector<string>& strs, vector<vector<vector<int>>>& dp){
+        if(ind == strs.size()) return 0 ;
+
+        if(dp[ind][zeros][ones] != -1) return dp[ind][zeros][ones] ;
+
+        int pick=0 ;
+        int m=0, n=0 ; 
+        if(isvalid(strs[ind], zeros, ones, m, n)){
+            pick = 1 + solve(ind+1, zeros-m, ones-n, strs, dp) ;
+        }
+        int notpick = solve(ind+1, zeros, ones, strs, dp) ;
+
+        return dp[ind][zeros][ones] = max(pick, notpick) ;
+    }
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        vector<vector<vector<int>>>dp(strs.size()+1, vector<vector<int>>(m+1, vector<int>(n+1, -1))) ;
+        return solve(0, m, n, strs, dp) ;
+    }
+};

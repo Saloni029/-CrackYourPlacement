@@ -1,0 +1,24 @@
+class Solution
+{
+    public:
+    //Function to find the maximum number of cuts.
+    int solve(int len, int x, int y, int z, vector<int>&dp){
+        if(len < 0) return INT_MIN ;
+        if(len == 0) return 0 ;
+        
+        if(dp[len] != -1) return dp[len] ;
+        
+        int ans = (len>=x) + solve(len-x, x, y, z, dp);
+        ans = max(ans, (len>=y) + solve(len-y, x, y, z, dp)) ;
+        ans = max(ans, (len>=z) + solve(len-z, x, y, z, dp)) ;
+        
+        return dp[len] = ans ;
+    }
+    
+    int maximizeTheCuts(int n, int x, int y, int z){
+        if(x>n && y>n && z>n) return 0 ;
+        vector<int>dp(n+1, -1) ;
+        int ans = solve(n, x, y, z, dp) ;
+        return ans < 0 ? 0 : ans; 
+    }
+};
